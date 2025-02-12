@@ -18,23 +18,22 @@ void solve() {
     int n; cin >> n;
     vector<ll> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
-    int l = 0;
-    int result = INT_MAX;
-    for (int r = 0; r < n; r++) {
-        current_gcd = gcd(current_gcd, a[r]);
-        while (current_gcd == 1) {
-            result = min(result, r - l + 1);
-            l++;
 
-            if (l <= r) {
-                current_gcd = a[l];
-                for (int k = l + 1; k <= r; k++) {
-                    current_gcd = gcd(current_gcd, a[k]);
-                }
-            }
+    ll result = LLONG_MAX;
+    for (ll l = 0, r = 0; r < n; r++) {
+        current_gcd = gcd(current_gcd, a[r]);
+
+        if (current_gcd == 1) {
+            ll x = 0;
+            for (l = r; x != 1; l--)
+                current_gcd = exchange(x, gcd(x, a[l]));
+
+            result = min(result, r - l);
+            l += 2;
         }
     }
-    cout << (result == INT_MAX ? -1 : result) << endl;
+
+    cout << (result == LLONG_MAX ? -1 : result) << endl;
 }
 
 int main() {
