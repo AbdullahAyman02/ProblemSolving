@@ -9,6 +9,7 @@ public:
             if (it != map.end()) {
                 index1 = i;
                 index2 = it->second;
+                break;
             }
             map[nums[i]] = i;
         }
