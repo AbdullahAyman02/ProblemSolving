@@ -10,7 +10,8 @@ public:
                 {
                     smallest_row = min(smallest_row, row);
                     smallest_col = min(smallest_col, col);
-                    largest_row = max(largest_row, row);
+                    // largest_row = max(largest_row, row);
+                    largest_row = row;
                     largest_col = max(largest_col, col);
                 }
             }
