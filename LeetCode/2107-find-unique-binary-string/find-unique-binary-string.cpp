@@ -1,11 +1,24 @@
 class Solution {
 public:
     string findDifferentBinaryString(vector<string>& nums) {
-        string ans;
-        for (int i = 0; i < nums.size(); i++) {
-            char curr = nums[i][i];
-            ans += curr == '0' ? '1' : '0';
+        int n = nums.size();
+        int size = pow(2, n);
+
+        vector<int> nu(size, 0);
+
+        for (string num : nums) {
+            int val = stoi(num, nullptr, 2);
+            nu[val]++;
         }
-        return ans;
+
+        for (int i = 0; i < size; i++) {
+            if (nu[i] == 0) {
+                string result = bitset<32>(i).to_string();
+                result = result.substr(32 - n);
+                return result;
+            }
+        }
+
+        return string(n, '0');
     }
 };
